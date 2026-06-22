@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AppController } from './app.controller'; 
+import { AppService } from './app.service';      
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { MongooseModule } from '@nestjs/mongoose';
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: true, // solo en desarrollo
+        synchronize: true, 
       }),
       inject: [ConfigService],
     }),
@@ -33,5 +35,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       inject: [ConfigService],
     }),
   ],
+  controllers: [AppController], 
+  providers: [AppService],     
 })
 export class AppModule {}
