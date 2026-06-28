@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -19,19 +21,18 @@ import { MongooseModule } from '@nestjs/mongoose';
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: true, // solo en desarrollo
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
 
-    // Conexión MongoDB
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (config: ConfigService) => ({
-        uri: config.get<string>('MONGO_URI'),
-      }),
-      inject: [ConfigService],
+    MongooseModule.forRoot('mongodb://localhost:27017/pc_store_catalog', {
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
     }),
+
+    AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
