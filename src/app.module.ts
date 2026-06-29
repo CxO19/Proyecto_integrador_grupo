@@ -13,6 +13,7 @@ import { ReviewsInventoryModule } from './reviews-inventory/reviews-inventory.mo
 import { ComponentSpecsModule } from './component-specs/component-specs.module';
 import { CompatibilityModule } from './compatibility/compatibility.module';
 
+import { ReviewsModule } from './reviews/reviews.module';
 @Module({
   imports: [
     ComponentSpecsModule,
@@ -49,12 +50,10 @@ import { CompatibilityModule } from './compatibility/compatibility.module';
     ProductsModule,
     CartModule,
     OrdersModule,
+    ReviewsModule,
   ],
 })
-<<<<<<< Updated upstream
 export class AppModule {}
 
 
-=======
 export class AppModule {}
->>>>>>> Stashed changes
