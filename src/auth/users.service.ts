@@ -1,9 +1,9 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { SignUpDto } from './auth.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -12,11 +12,11 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async findByEmail(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User | null> {
     return this.usersRepository.findOne({ where: { email } });
   }
 
-  async findById(id: string): Promise<User> {
+  async findById(id: string): Promise<User | null> {
     return this.usersRepository.findOne({ where: { id } });
   }
 
@@ -26,12 +26,13 @@ export class UsersService {
       throw new BadRequestException('El email ya está registrado');
     }
 
-    const hashedPassword = await bcrypt.hash(signUpDto.password, 10);
-
-    const user = this.usersRepository.create({
-      ...signUpDto,
-      password: hashedPassword,
-    });
+    const hashed = await (bcrypt.hash as (data: string, rounds: number) => Promise<string>)(signUpDto.password, 10);
+        
+    const user = new User();
+    user.email = signUpDto.email;
+    user.password = hashed;
+    user.firstName = signUpDto.firstName;
+    user.lastName = signUpDto.lastName;
 
     return this.usersRepository.save(user);
   }
