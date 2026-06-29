@@ -48,7 +48,6 @@ export class SuppliersController {
     return this.service.addProduct(id, dto);
   }
 
-  // DELETE /suppliers/:id/products/:productId [admin]
   @Delete(':id/products/:productId')
   removeProduct(
     @Param('id', ParseIntPipe) id: number,
