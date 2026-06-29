@@ -51,6 +51,10 @@ import { CompatibilityModule } from './compatibility/compatibility.module';
     OrdersModule,
   ],
 })
+<<<<<<< Updated upstream
 export class AppModule {}
 
 
+=======
+export class AppModule {}
+>>>>>>> Stashed changes
