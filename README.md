@@ -1,99 +1,145 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# PC Store Catalog API 🚀
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API RESTful desarrollada con **NestJS** para la gestión de un catálogo de hardware y e-commerce. Este proyecto es el resultado del **Proyecto Integrador de Programación 3**, demostrando la implementación de arquitecturas escalables, bases de datos híbridas y buenas prácticas de desarrollo.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🛠️ Tecnologías Utilizadas
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Framework:** NestJS (Node.js / TypeScript)
+- **Base de Datos Relacional:** PostgreSQL (Gestionado con TypeORM)
+- **Base de Datos NoSQL:** MongoDB (Gestionado con Mongoose)
+- **Autenticación:** JSON Web Tokens (JWT) y Passport
+- **Documentación:** Swagger / OpenAPI
+- **Testing:** Postman (Pruebas E2E) y k6 (Pruebas de estrés)
+- **Contenedores:** Docker & Docker Compose
 
-## Project setup
+---
 
+## 🏗️ Arquitectura de Datos (Enfoque Híbrido)
+
+El proyecto utiliza un enfoque políglota para maximizar el rendimiento según el dominio de datos:
+
+1. **PostgreSQL (Estructurado y Transaccional):**
+   - Usuarios y Roles (`users`)
+   - Catálogo de Productos (`products`)
+   - Categorías y Marcas (`categories`, `brands`)
+   - Órdenes y Detalles de Órdenes (`orders`, `order_items`)
+   - Carrito de compras (`cart`, `cart_items`)
+
+2. **MongoDB (Documental y Escalable):**
+   - Reseñas de Productos (`reviews`)
+   - Ideal para almacenar calificaciones, comentarios extensos y metadatos flexibles sin esquemas rígidos.
+
+---
+
+## 🚀 Guía de Instalación y Ejecución
+
+### 1. Requisitos Previos
+- Node.js (v18+)
+- Docker y Docker Compose
+- Postman (opcional para pruebas)
+
+### 2. Levantar las Bases de Datos
+El proyecto incluye un archivo `docker-compose.yml` preconfigurado.
 ```bash
-$ npm install
+# Levanta los contenedores de PostgreSQL y MongoDB en segundo plano
+docker compose up -d
 ```
 
-## Compile and run the project
+### 3. Configurar Variables de Entorno
+Crea un archivo `.env` en la raíz del proyecto basándote en `.env.template`:
+```env
+# Servidor
+PORT=3000
 
-```bash
-# development
-$ npm run start
+# PostgreSQL
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=admin
+DB_NAME=pcstore
 
-# watch mode
-$ npm run start:dev
+# MongoDB
+MONGO_URI=mongodb://root:example@localhost:27017/pcstore?authSource=admin
 
-# production mode
-$ npm run start:prod
+# JWT
+JWT_SECRET=super-secret-key-2026
 ```
 
-## Run tests
-
+### 4. Instalar Dependencias
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### 5. Iniciar la Aplicación
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Modo desarrollo con recarga automática
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## 🔐 Ejemplos de Autenticación
 
-Check out a few resources that may come in handy when working with NestJS:
+**1. Registro de Usuario:**
+```bash
+curl -X POST http://localhost:3000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "test@test.com", "password": "Password123!", "firstName": "Test", "lastName": "User"}'
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+**2. Inicio de Sesión:**
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "test@test.com", "password": "Password123!"}'
+# Retorna: { "token": "ey..." }
+```
 
-## Support
+**3. Usar el Token (Petición Autenticada):**
+```bash
+curl -X GET http://localhost:3000/users \
+  -H "Authorization: Bearer ey..."
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## 📚 Documentación Interactiva (Swagger)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+La API cuenta con documentación autogenerada y visual interactiva.
+Una vez que el servidor esté corriendo, abre tu navegador en:
+👉 **[http://localhost:3000/api/docs](http://localhost:3000/api/docs)**
 
-## License
+Desde Swagger puedes probar todos los endpoints y ver la estructura exacta de las peticiones (DTOs) y respuestas. Las rutas protegidas requieren autenticación con Token JWT.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# Proyecto_integrador_grupo
+---
+
+## 🧪 Pruebas y Colecciones
+
+En la carpeta `/test` encontrarás los recursos necesarios para validar la API:
+
+- **Postman:** Importa el archivo `test/postman/pc_store_collection.json` en Postman. Incluye el flujo completo (Registro -> Login -> Crear Categoría -> Crear Producto -> Añadir al Carrito -> Finalizar Compra).
+- **Pruebas de Estrés (k6):** Ejecuta `test/stress/k6_stress_test.js` para simular tráfico de múltiples usuarios concurrentes validando los SLA de la aplicación.
+
+---
+
+## 👥 Resumen de Endpoints
+
+| Módulo | Método | Ruta | Descripción | Auth | Rol |
+|--------|--------|------|-------------|------|-----|
+| **Auth** | POST | `/auth/register` | Registro de usuario | No | Público |
+| **Auth** | POST | `/auth/login` | Inicio de sesión | No | Público |
+| **Users** | GET | `/users` | Listar usuarios | Sí | Admin |
+| **Brands** | GET | `/brands` | Listar marcas | No | Público |
+| **Brands** | POST | `/brands` | Crear marca | Sí | Admin |
+| **Categories**| GET | `/categories` | Listar categorías | No | Público |
+| **Categories**| POST | `/categories` | Crear categoría | Sí | Admin |
+| **Products** | GET | `/products` | Listar productos | No | Público |
+| **Products** | POST | `/products` | Crear producto | Sí | Admin |
+| **Cart** | GET | `/cart` | Ver carrito activo | Sí | Client/Admin |
+| **Cart** | POST | `/cart/items` | Añadir al carrito | Sí | Client/Admin |
+| **Orders** | POST | `/orders` | Crear orden (Checkout) | Sí | Client/Admin |
+| **Reviews**| POST | `/review-details` | Reseña extendida (MongoDB) | Sí | Client |
+
+*(Para ver todos los detalles, DTOs y códigos de error, consulta la documentación viva en Swagger).*
