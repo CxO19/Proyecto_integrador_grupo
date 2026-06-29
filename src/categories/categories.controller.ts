@@ -33,6 +33,7 @@ export class CategoriesController {
   }
 
   @Post()
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Crear una nueva categoría' })
@@ -41,6 +42,7 @@ export class CategoriesController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Actualizar una categoría' })
@@ -49,6 +51,7 @@ export class CategoriesController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Eliminar una categoría' })

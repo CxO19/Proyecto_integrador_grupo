@@ -35,6 +35,7 @@ export class ProductsController {
   }
 
   @Post()
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Crear un nuevo producto' })
@@ -43,6 +44,7 @@ export class ProductsController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Actualizar un producto' })
@@ -51,6 +53,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Eliminar un producto' })
