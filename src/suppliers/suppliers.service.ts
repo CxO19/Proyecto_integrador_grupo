@@ -3,22 +3,12 @@ import { CreateSupplierDto, UpdateSupplierDto, AddProductSupplierDto } from './d
 
 @Injectable()
 export class SuppliersService {
-<<<<<<< Updated upstream
-
-=======
-  // Simulamos las dos tablas en memoria
->>>>>>> Stashed changes
   private suppliers: any[] = [];
   private productSuppliers: any[] = [];
   
   private supplierIdCounter = 1;
   private relIdCounter = 1;
 
-<<<<<<< Updated upstream
-
-=======
-  // --- REQUERIMIENTO: CRUD PROVEEDORES ---
->>>>>>> Stashed changes
   async create(dto: CreateSupplierDto) {
     const newSupplier = {
       id: this.supplierIdCounter++,
@@ -31,11 +21,6 @@ export class SuppliersService {
     return newSupplier;
   }
 
-<<<<<<< Updated upstream
-
-=======
-  // REQUERIMIENTO: Búsqueda, paginación y ordenamiento
->>>>>>> Stashed changes
   async findAll(query: { search?: string; page?: string; limit?: string }) {
     let result = [...this.suppliers];
 
@@ -48,7 +33,6 @@ export class SuppliersService {
       );
     }
 
-    // Paginación simple
     const page = parseInt(query.page || '1', 10);
     const limit = parseInt(query.limit || '10', 10);
     const startIndex = (page - 1) * limit;
@@ -81,15 +65,9 @@ export class SuppliersService {
     return { message: `Proveedor ${id} desactivado correctamente`, supplier };
   }
 
-<<<<<<< Updated upstream
 
   async addProduct(supplierId: number, dto: AddProductSupplierDto) {
     await this.findOne(supplierId);
-=======
-  // --- REQUERIMIENTO: RELACIÓN PRODUCTOS (ProductSupplier) ---
-  async addProduct(supplierId: number, dto: AddProductSupplierDto) {
-    await this.findOne(supplierId); // Valida que el proveedor exista
->>>>>>> Stashed changes
 
     const newRelation = {
       id: this.relIdCounter++,
