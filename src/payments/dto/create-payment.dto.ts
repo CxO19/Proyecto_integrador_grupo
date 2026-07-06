@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import { IsEnum, IsNumber, IsInt, IsOptional, IsDateString } from 'class-validator';
 import { PaymentMethod, PaymentStatus } from '../../payments/entities/payment.entity';
 
@@ -20,6 +19,3 @@ export class CreatePaymentDto {
   @IsOptional()
   paidAt?: string;
 }
-=======
-export class CreatePaymentDto {}
->>>>>>> Stashed changes

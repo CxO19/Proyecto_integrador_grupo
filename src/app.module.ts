@@ -54,6 +54,3 @@ import { ReviewsModule } from './reviews/reviews.module';
   ],
 })
 export class AppModule {}
-
-
-export class AppModule {}
