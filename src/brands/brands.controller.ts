@@ -33,6 +33,7 @@ export class BrandsController {
   }
 
   @Post()
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Crear una nueva marca' })
@@ -41,6 +42,7 @@ export class BrandsController {
   }
 
   @Patch(':id')
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Actualizar una marca' })
@@ -49,6 +51,7 @@ export class BrandsController {
   }
 
   @Delete(':id')
+  @Roles(UserRole.ADMIN)
   @ApiBearerAuth('JWT-auth')
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Eliminar una marca' })

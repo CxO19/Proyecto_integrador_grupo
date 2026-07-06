@@ -9,9 +9,16 @@ import { BrandsModule } from './brands/brands.module';
 import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { OrdersModule } from './orders/orders.module';
+import { ReviewsInventoryModule } from './reviews-inventory/reviews-inventory.module';
+import { ComponentSpecsModule } from './component-specs/component-specs.module';
+import { CompatibilityModule } from './compatibility/compatibility.module';
+
 import { ReviewsModule } from './reviews/reviews.module';
 @Module({
   imports: [
+    ComponentSpecsModule,
+    ReviewsInventoryModule,
+    CompatibilityModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -46,4 +53,7 @@ import { ReviewsModule } from './reviews/reviews.module';
     ReviewsModule,
   ],
 })
+export class AppModule {}
+
+
 export class AppModule {}
