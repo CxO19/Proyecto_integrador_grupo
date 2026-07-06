@@ -115,7 +115,35 @@ Desde Swagger puedes probar todos los endpoints y ver la estructura exacta de la
 
 ---
 
-## 🧪 Pruebas y Colecciones
+## ✅ Pruebas Unitarias
+
+El proyecto incluye pruebas unitarias con **Jest** y **@nestjs/testing** para los servicios, controladores
+y el módulo de autenticación. No se usa base de datos real: los repositorios de TypeORM y los modelos de
+Mongoose se simulan con mocks (`jest.fn()`).
+
+```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar todas las pruebas unitarias
+npm test
+
+# Ejecutar las pruebas y generar el reporte de cobertura
+npm run test:cov
+```
+
+El reporte de cobertura se genera en la carpeta `/coverage`. Para verlo de forma visual, abre
+`coverage/lcov-report/index.html` en tu navegador.
+
+> Si `npm test` falla con `Module ts-jest in the transform option was not found`, borra `node_modules`
+> y `package-lock.json` y vuelve a correr `npm install` (suele deberse a versiones de `jest-*` desincronizadas).
+
+Cada módulo (`auth`, `products`, `categories`, `orders`, `cart`, `brands`, `reviews`, `users`) tiene sus
+archivos `*.spec.ts` junto al código fuente correspondiente, cubriendo operaciones CRUD, manejo de errores
+(`NotFoundException`, `BadRequestException`, `ConflictException`, `UnauthorizedException`) y, en el caso de
+`auth`, el registro, inicio de sesión y generación/validación de JWT.
+
+## 🧪 Pruebas Manuales y Colecciones
 
 En la carpeta `/test` encontrarás los recursos necesarios para validar la API:
 
