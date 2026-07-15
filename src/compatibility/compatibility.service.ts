@@ -60,8 +60,8 @@ export class CompatibilityService {
 
     for (const rule of this.rules) {
 
-      const componentA = products.find(p => p.category.toLowerCase() === rule.categoryA.toLowerCase());
-      const componentB = products.find(p => p.category.toLowerCase() === rule.categoryB.toLowerCase());
+      const componentA = products?.find(p => p.category?.toLowerCase() === rule.categoryA.toLowerCase());
+      const componentB = products?.find(p => p.category?.toLowerCase() === rule.categoryB.toLowerCase());
 
       // Si ambos componentes están presentes, evaluamos la compatibilidad
       if (componentA && componentB) {
