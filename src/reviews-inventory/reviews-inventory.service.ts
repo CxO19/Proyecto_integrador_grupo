@@ -17,8 +17,8 @@ export class ReviewsInventoryService {
 
 
   async createReview(userId: string, productId: number, dto: CreateReviewDto) {
-    if (dto.rating < 1 || dto.rating > 5) {
-      throw new BadRequestException('El rating debe estar entre 1 y 5.');
+    if (dto.rating !== undefined && (dto.rating < 1 || dto.rating > 5)) {
+    throw new BadRequestException('El rating debe estar entre 1 y 5.');
     }
 
 
