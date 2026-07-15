@@ -40,8 +40,8 @@ export class ReviewsInventoryService {
     const newReview = {
       id: this.reviewIdCounter++,
       userId,
-      productId,
       ...dto,
+      productId,
       createdAt: new Date(),
     };
 

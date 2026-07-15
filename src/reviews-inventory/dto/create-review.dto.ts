@@ -3,4 +3,5 @@ export class CreateReviewDto {
   type: string;
   quantity: number;
   reason: string;
+  rating?: number;
 }
